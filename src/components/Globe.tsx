@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Stats, OrbitControls, useTexture } from '@react-three/drei'
-import { FrontSide } from 'three'
+import * as THREE from 'three'
 
 export function Globe() {
   // const mapcap = useTexture('../assets/afe.png')
@@ -18,12 +18,12 @@ export function Globe() {
           visible={true}
           transparent={false}
           opacity={1}
-          depthTest={true}
-          depthWrite={true}
-          side={FrontSide}
+          side={THREE.FrontSide}
 
           color={0x4e4cda}
           metalness={0} 
+          emissiveIntensity={0.1}
+          emissive="blue"
 
         />
       </mesh>
