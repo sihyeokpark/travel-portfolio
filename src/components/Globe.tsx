@@ -1,19 +1,22 @@
-import React, { useRef } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { Stats, OrbitControls, useTexture } from '@react-three/drei'
+import { useRef } from 'react'
+import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
+import { Sphere } from '@react-three/drei'
 
-export function Globe() {
-  // const mapcap = useTexture('../assets/afe.png')
+import { Continents } from './Continent'
+
+export function Globe({ radius }: { radius: number }) {
   const meshRef = useRef<THREE.Mesh>(null)
 
+
   useFrame(() => {
-    meshRef.current!.rotation.y += 0.01
+    // meshRef.current!.rotation.y += 0.01
   })
 
   return (
-      <mesh ref={meshRef} position={[0, 0, 0]} rotation={[0, 45*Math.PI/180, 0]}>
-        <sphereGeometry args={[8, 32, 32]} />
+    <>
+      <mesh ref={meshRef} position={[0, 0, 0]}>
+        <sphereGeometry args={[radius, 32, 32]} />
         <meshStandardMaterial 
           visible={true}
           transparent={false}
@@ -24,8 +27,10 @@ export function Globe() {
           metalness={0} 
           emissiveIntensity={0.1}
           emissive="blue"
-
         />
       </mesh>
+      <Continents earthRadius={radius}/>
+      
+    </>
   )
 }
