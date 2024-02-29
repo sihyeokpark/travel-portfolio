@@ -1,4 +1,5 @@
 import { Canvas } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
 import { Bloom, EffectComposer } from '@react-three/postprocessing'
 
 
@@ -19,7 +20,7 @@ export function Earth() {
         </EffectComposer>
         {/* <Halo /> */}
 
-        {/* <OrbitControls /> */}
+        <OrbitControls />
       </Canvas>
     </>
   )
