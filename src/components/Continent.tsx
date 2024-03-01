@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { useRecoilState } from 'recoil'
 import { Sphere } from '@react-three/drei'
-import { ThreeEvent, useFrame } from '@react-three/fiber'
+import { useFrame } from '@react-three/fiber'
 import { useEffect, useRef, useState } from 'react'
 
 import { ContinentsTypeState, TravelState } from '../utils/recoil'
@@ -126,9 +126,9 @@ function Continent({ startAngle, earthRadius, size, y, speed, color }: Continent
     angle += speed
   })
 
-  const handleOnMouse = (event: ThreeEvent<PointerEvent>) => {
-    // event.object.scale.set(2, 2, 2)
-  }
+  // const handleOnMouse = (event: ThreeEvent<PointerEvent>) => {
+  //   // event.object.scale.set(2, 2, 2)
+  // }
 
   return (
     <Sphere ref={sphereRef} args={[size, 16, 16]} position={[0, y, 0]}>
