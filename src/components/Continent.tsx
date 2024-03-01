@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { useRecoilState } from 'recoil'
 import { Sphere } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber'
+import { ThreeEvent, useFrame } from '@react-three/fiber'
 import { useEffect, useRef, useState } from 'react'
 
 import { ContinentsTypeState, TravelState } from '../utils/recoil'
@@ -118,10 +118,16 @@ function Continent({ startAngle, earthRadius, size, y, speed, color }: Continent
 
   let angle = startAngle
   useFrame(() => {
+    if (sphereRef.current!.position.z < 0) sphereRef.current!.visible = false // Hide the sphere if it's behind the earth.. it will be replace with smart optimize about a camera view
+    else sphereRef.current!.visible = true
     sphereRef.current!.position.x = Math.sin(angle) * truncatedCircleRadius
     sphereRef.current!.position.z = Math.cos(angle) * truncatedCircleRadius
     angle += speed
   })
+
+  const handleOnMouse = (event: ThreeEvent<PointerEvent>) => {
+    // event.object.scale.set(2, 2, 2)
+  }
 
   return (
     <Sphere ref={sphereRef} args={[size, 16, 16]} position={[0, y, 0]}>
