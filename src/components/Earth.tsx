@@ -19,7 +19,7 @@ export function Earth({ earthRadius }: { earthRadius: number }) {
         </EffectComposer>
         {/* <Halo /> */}
 
-        <OrbitControls />
+        <OrbitControls enableZoom={false} enablePan={false}/>
       </Canvas>
     </>
   )
