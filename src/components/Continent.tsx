@@ -1,7 +1,9 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { Sphere } from '@react-three/drei'
+import { ContinentsState } from '../utils/recoil'
+import { useRecoilState } from 'recoil'
 
 type ContinentProps = { startAngle: number, earthRadius: number, size: number, y: number, speed: number }
 
@@ -10,8 +12,6 @@ function Continent({ startAngle, earthRadius, size, y, speed }: ContinentProps) 
 
   const truncatedCircleArea = (Math.pow(earthRadius, 2) - Math.pow(y, 2)) * Math.PI
   const truncatedCircleRadius = Math.sqrt(truncatedCircleArea / Math.PI)
-  console.log(truncatedCircleRadius)
-
 
   let angle = startAngle
   useFrame(() => {
@@ -28,12 +28,37 @@ function Continent({ startAngle, earthRadius, size, y, speed }: ContinentProps) 
 }
 
 export function Continents({ earthRadius }: { earthRadius: number }) {
+  const [continentsState, setContinentsState] = useRecoilState(ContinentsState)
+
+  const [continents, setContinents] = useState<number[][]>([])
+
+  useEffect(() => {
+    console.log(continentsState)
+
+    const continents: number[][] = continentsState.continents
+    const unitY = earthRadius*2 / continents.length
+
+    const newContinents = []
+
+    for (let i = 0; i < continents.length; i++) {
+      const y = earthRadius - i * unitY
+      for (let j = 0; j < continents[i].length; j++) {
+        if (continents[i][j] === 1) {
+          const startAngle = j * 2 * Math.PI / continents[i].length
+          newContinents.push([startAngle, y])
+        }
+      }
+    }
+
+    setContinents(newContinents)
+
+  }, [continentsState])
 
   return (
     <>
       {
-        [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((y) => {
-          return <Continent startAngle={Math.random()*2*Math.PI} earthRadius={earthRadius} size={0.08} y={y} speed={0.01}/>
+        continents.map((list) => {
+          return <Continent startAngle={list[0]} earthRadius={earthRadius} size={0.03} y={list[1]} speed={0.001}/>
         })
       }
       
@@ -41,4 +66,3 @@ export function Continents({ earthRadius }: { earthRadius: number }) {
 
   )
 }
-
