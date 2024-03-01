@@ -11,6 +11,7 @@ import { getImageArray } from '../utils/getImageArray'
 
 const N = 8
 const MIN_CONTINENT_SIZE = N*N / 3
+const CONTINET_SLICE = 0
 
 type ContinentProps = { startAngle: number, earthRadius: number, size: number, y: number, speed: number, color: number }
 
@@ -52,7 +53,7 @@ export function Continents({ earthRadius }: { earthRadius: number }) {
 }
 
 export function MakeWorldMap() {
-  const [continentsState, setContinentsState] = useRecoilState(ContinentsTypeState)
+  const [continentsTypeState, setContinentsTypeState] = useRecoilState(ContinentsTypeState)
   const [travelState, setTravelState] = useRecoilState(TravelState)
 
   function loadImage(url: string, callback: (image: HTMLImageElement) => void) {
@@ -100,8 +101,8 @@ export function MakeWorldMap() {
           else continents[i/N].push(CONTINENT.SEE)
         }
       }
-  
-      setContinentsState(continents)
+      
+      setContinentsTypeState(continents.slice(CONTINET_SLICE, -CONTINET_SLICE))
     })
   }, [])
 
