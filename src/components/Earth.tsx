@@ -12,7 +12,7 @@ export function Earth() {
         <ambientLight intensity={0.2} />
         <directionalLight position={[0, 1, 1]} />
         <directionalLight position={[-2, 1, 1]} />
-        <directionalLight position={[1, 1, 2]} color={0xFF00FF} />
+        {/* <directionalLight position={[1, 1, 2]} color={0xFF00FF} /> */} {/* pink */}
         
         <Globe radius={8}></Globe>
         <EffectComposer>
