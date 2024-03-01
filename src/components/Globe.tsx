@@ -1,16 +1,10 @@
 import { useRef } from 'react'
-import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
 import { Continents } from './Continent'
 
 export function Globe({ radius }: { radius: number }) {
   const meshRef = useRef<THREE.Mesh>(null)
-
-
-  useFrame(() => {
-    // meshRef.current!.rotation.y += 0.01
-  })
 
   return (
     <>
@@ -29,7 +23,6 @@ export function Globe({ radius }: { radius: number }) {
         />
       </mesh>
       <Continents earthRadius={radius}/>
-      
     </>
   )
 }

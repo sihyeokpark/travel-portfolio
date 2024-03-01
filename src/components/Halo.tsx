@@ -8,7 +8,7 @@ export function Halo() {
   useFrame(() => {
     const scale = 1 + 0.03 * Math.sin(Date.now() * 0.001)
     meshRef.current?.scale.set(scale, scale, scale)
-  });
+  })
 
   return (
     <mesh ref={meshRef} position={[0, 0, 0]}>

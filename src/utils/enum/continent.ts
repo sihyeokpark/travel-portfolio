@@ -1,0 +1,5 @@
+export enum CONTINENT {
+  SEE = 0,
+  UNTRAVELED_LAND = 1,
+  TRAVELED_LAND = 2
+}

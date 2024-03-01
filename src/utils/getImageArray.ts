@@ -1,9 +1,9 @@
 export function getImageArray(pixels: Uint8ClampedArray, width: number, height: number) {
-  const RGBArray = []
+  const AArray = []
   
   for (let i = 0; i < pixels.length; i += 4) {
     const a = pixels[i + 3]
-    RGBArray.push(a)
+    AArray.push(a)
   }
 
   const imageArray = []
@@ -11,7 +11,7 @@ export function getImageArray(pixels: Uint8ClampedArray, width: number, height: 
     const row = []
     for (let j = 0; j < width; j++) {
       const index = i * width + j
-      row.push(RGBArray[index])
+      row.push(AArray[index])
     }
     imageArray.push(row)
   }

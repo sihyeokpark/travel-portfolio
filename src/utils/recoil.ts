@@ -1,20 +1,11 @@
 import { atom } from 'recoil'
 
+export const ContinentsTypeState = atom<number[][]>({
+  key: 'ContinentsTypeState',
+  default: []
+})
 
-export interface IContinents {
-  continents: number[][]
-}
-
-export const ContinentsState = atom<IContinents>({
-  key: 'ContinentsState',
-  default: {
-    continents: []
-  }
-});
-
-export const TravelState = atom<IContinents>({
+export const TravelState = atom<number[][]>({
   key: 'TravelState',
-  default: {
-    continents: [[1360, 341]]
-  }
-});
+  default: [[1360, 341]]
+})
